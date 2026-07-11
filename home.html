@@ -43,6 +43,16 @@ p{
     line-height:1.8;
 }
 
+#loveCounter{
+    margin-top:20px;
+    font-size:22px;
+    font-weight:bold;
+    color:#ff2d75;
+    background:#fff0f5;
+    padding:15px;
+    border-radius:15px;
+}
+
 .heart{
     position:absolute;
     color:#ff2d75;
@@ -66,15 +76,41 @@ p{
 <body>
 
 <div class="card">
-    <h1>❤️ أهلاً بكِ ❤️</h1>
+    <h1>❤️ أهلاً بكِ هدى ❤️</h1>
 
     <p>
         كل لحظة معك جميلة،<br>
         وأتمنى أن تظل الابتسامة على وجهك دائمًا. 🌹
     </p>
+
+    <h2>⏳ مضى على علاقتنا</h2>
+    <div id="loveCounter"></div>
+
 </div>
 
 <script>
+
+// تاريخ بداية العلاقة
+const startDate = new Date("2026-07-10T12:00:00");
+
+function updateCounter(){
+    const now = new Date();
+    const diff = now - startDate;
+
+    const days = Math.floor(diff/(1000*60*60*24));
+    const hours = Math.floor((diff/(1000*60*60))%24);
+    const minutes = Math.floor((diff/(1000*60))%60);
+    const seconds = Math.floor((diff/1000)%60);
+
+    document.getElementById("loveCounter").innerHTML =
+    `❤️ ${days} يوم<br>
+     ⏰ ${hours} ساعة ${minutes} دقيقة ${seconds} ثانية`;
+}
+
+updateCounter();
+setInterval(updateCounter,1000);
+
+// القلوب المتحركة
 for(let i=0;i<40;i++){
     let heart=document.createElement("div");
     heart.className="heart";
@@ -84,6 +120,7 @@ for(let i=0;i<40;i++){
     heart.style.fontSize=(15+Math.random()*30)+"px";
     document.body.appendChild(heart);
 }
+
 </script>
 
 </body>

@@ -1,90 +1,58 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>❤️ إليكِ</title>
+music<!-- زر الموسيقى -->
+<audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+    متصفحك لا يدعم تشغيل الصوت.
+</audio>
+
+<button id="musicBtn" onclick="toggleMusic()">
+    🎵
+</button>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
+#musicBtn{
+    position:fixed;
+    top:20px;
+    left:20px;
+    width:60px;
+    height:60px;
+    border:none;
+    border-radius:50%;
+    background:linear-gradient(135deg,#ff2d75,#ff6fa5);
+    color:#fff;
+    font-size:26px;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(0,0,0,.3);
+    transition:all .3s ease;
+    z-index:999;
 }
 
-body{
-    background:linear-gradient(135deg,#ff4e8a,#ff9ec4);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    overflow:hidden;
+#musicBtn:hover{
+    transform:scale(1.1);
 }
 
-.card{
-    background:white;
-    padding:40px;
-    border-radius:20px;
-    text-align:center;
-    box-shadow:0 10px 30px rgba(0,0,0,.2);
-    max-width:400px;
-    z-index:10;
+.playing{
+    animation:spin 3s linear infinite;
 }
 
-h1{
-    color:#ff2d75;
-    margin-bottom:20px;
-}
-
-p{
-    font-size:18px;
-    color:#444;
-    line-height:1.8;
-}
-
-.heart{
-    position:absolute;
-    color:#ff2d75;
-    font-size:24px;
-    animation:float 8s linear infinite;
-}
-
-@keyframes float{
-    0%{
-        transform:translateY(100vh);
-        opacity:0;
-    }
-    100%{
-        transform:translateY(-120vh);
-        opacity:1;
-    }
+@keyframes spin{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
 }
 </style>
 
-</head>
-<body>
-
-<div class="card">
-    <h1>❤️ أهلاً بكِ ❤️</h1>
-
-    <p>
-        كل لحظة معك جميلة،<br>
-        وأتمنى أن تظل الابتسامة على وجهك دائمًا. 🌹
-    </p>
-</div>
-
 <script>
-for(let i=0;i<40;i++){
-    let heart=document.createElement("div");
-    heart.className="heart";
-    heart.innerHTML="❤️";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.animationDuration=(5+Math.random()*5)+"s";
-    heart.style.fontSize=(15+Math.random()*30)+"px";
-    document.body.appendChild(heart);
+const music = document.getElementById("music");
+const musicBtn = document.getElementById("musicBtn");
+
+function toggleMusic(){
+    if(music.paused){
+        music.play();
+        musicBtn.innerHTML = "⏸️";
+        musicBtn.classList.add("playing");
+    }else{
+        music.pause();
+        musicBtn.innerHTML = "🎵";
+        musicBtn.classList.remove("playing");
+    }
 }
 </script>
-
-</body>
-</html>
